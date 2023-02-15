@@ -69,6 +69,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="classes\dataClasses\userdata.cs" />
+    <Compile Include="rememberme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>rememberme.settings</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="forms\KontoÜbersicht.resx">
       <DependentUpon>KontoÜbersicht.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +101,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="rememberme.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>rememberme.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

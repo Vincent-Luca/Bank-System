@@ -25,17 +25,19 @@ namespace Banksystem.forms
 
         private void filldgv()
         {
+            dgv_transactions.Rows.Clear();
+
             DataTable transactions = Databank.SQLSelect("Select Accounts.Name, Transactions.Amount, Transactions.Date, Transactions.subtraction from transactions, Accounts where Transactions.FromID = Accounts.ID and Transactions.ToID = " + userdata.ID.ToString()+";");
             foreach (DataRow transaction in transactions.Rows)
             {
                 dgv_transactions.Rows.Add(transaction[0], transaction[1]+"€", transaction[2]);
-                if (transaction[3].ToString() == "1")
+                if (bool.Parse(transaction[3].ToString()))
                 {
-                    dgv_transactions.Rows[dgv_transactions.Rows.Count-1].Cells[2].Style = new DataGridViewCellStyle { ForeColor = Color.Red};
+                    dgv_transactions.Rows[dgv_transactions.Rows.Count-2].Cells[1].Style = new DataGridViewCellStyle { ForeColor = Color.Red};
                 }
                 else
                 {
-                    dgv_transactions.Rows[dgv_transactions.Rows.Count - 1].Cells[2].Style = new DataGridViewCellStyle { ForeColor = Color.Green };
+                    dgv_transactions.Rows[dgv_transactions.Rows.Count - 2].Cells[1].Style = new DataGridViewCellStyle { ForeColor = Color.Green };
                 }
             }
         }
