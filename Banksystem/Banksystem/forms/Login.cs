@@ -58,12 +58,12 @@ namespace Banksystem
 
 
             Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>() { { "@name", txt_username.Text }, { "@pin", encryptedpin } };
-            if (!Databank.isAvailable("Select * from Accounts where Name = @name and Pin = @pin", dict))
+            if (!Databank.isAvailable("Select * from Account where Name = @name and Pin = @pin", dict))
             {
                 MessageBox.Show("No account with the Given Username and Pin were found, please double check Spelling and try again");
                 return;
             }
-            InsertData(Databank.SQLSelect("Select * from Accounts where Name = @name and Pin = @pin", dict));
+            InsertData(Databank.SQLSelect("Select * from Account where Name = @name and Pin = @pin", dict));
 
             //if (rememberme)
             //{
@@ -83,7 +83,7 @@ namespace Banksystem
         {
             foreach (DataRow item in data.Rows)
             {
-                userdata = new userdata(int.Parse(item[0].ToString()), item[1].ToString(), item[2].ToString(), DateTime.Parse(item[3].ToString()), int.Parse(item[4].ToString()), item[5].ToString());
+                userdata = new userdata(int.Parse(item[0].ToString()), item[1].ToString(), item[2].ToString(), DateTime.Parse(item[3].ToString()));
             }
             return;
         }

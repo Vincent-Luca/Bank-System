@@ -12,7 +12,7 @@ namespace Banksystem.forms
 {
     public partial class NewAccount : Form
     {
-        private DBConnection Databank;
+        private readonly DBConnection Databank;
         public NewAccount(DBConnection Databank)
         {
             InitializeComponent();
@@ -27,36 +27,46 @@ namespace Banksystem.forms
                 return;
             }
 
-            if (Databank.isAvailable("Select ID from Accounts where Name = '"+ txt_username.Text + "';"))
+            if (Databank.isAvailable("Select AccID from Account where Name = '"+ txt_username.Text + "';"))
             {
                 MessageBox.Show("Username already taken, please choose something else or a variation of your Name");
                 return;
             }
 
             encryption encript = new encryption();
-            
-            int id = int.Parse(Databank.SQLSelect("Select TOP(1) ID from accounts order by ID desc;").Rows[0][0].ToString()) + 1;
+
+            int id = int.Parse(Databank.SQLSelect("Select TOP(1) AccID from Account order by AccID desc;").Rows[0][0].ToString()) + 1;
             Dictionary<string, dynamic> data = new Dictionary<string, dynamic>()
             {
                 {"@ID",id},
                 {"@Name",txt_username.Text },
                 {"@Pin", encript.encrypt(txt_pin.Text) },
-                {"@CreationDate",DateTime.Now.ToShortDateString() },
-                {"@Total", 500 },
-                {"@IBAN",createIBAN(encript) }
+                {"@CreationDate",DateTime.Parse(DateTime.Now.ToShortDateString()) }
             };
-            Databank.executenonquery("Insert into Accounts(ID,Name,Pin,CreationDate,Total,IBAN) values(@ID,@Name,@Pin,@CreationDate,@Total,@IBAN);", data);
-            
-            id = int.Parse(Databank.SQLSelect("Select TOP(1) ID from Transactions order by ID desc;").Rows[0][0].ToString()) + 1;
+            Databank.executenonquery("Insert into Account(AccID,Name,Pin,CreationDate) values(@ID,@Name,@Pin,@CreationDate);", data);
+
+            int kid = int.Parse(Databank.SQLSelect("Select TOP(1) KID from Konto order by KID desc;").Rows[0][0].ToString()) + 1;
+            data.Clear();
+            data.Add("@kid",kid);
+            data.Add("@accid",id);
+            data.Add("@creationdate",DateTime.Parse(DateTime.Now.ToShortDateString()));
+            data.Add("@total",500);
+            data.Add("@iban", createIBAN(encript));
+            data.Add("@name","Main");
+            data.Add("@main",true);
+            Databank.executenonquery("Insert into Konto(KID,AccID,CreationDate,Total,IBAN,Name,Main) Values(@kid,@accid,@creationdate,@total,@iban,@name,@main)",data);
+
+
+            id = int.Parse(Databank.SQLSelect("Select TOP(1) TransID from Transactions order by TransID desc;").Rows[0][0].ToString()) + 1;
             data.Clear();
             data.Add("@ID", id);
             data.Add("@FromID", "1");
-            data.Add("@ToID", id);
+            data.Add("@ToID", kid);
             data.Add("@Amount", 500);
-            data.Add("@Date", DateTime.Now.ToShortDateString());
+            data.Add("@Date", DateTime.Parse(DateTime.Now.ToShortDateString()));
             data.Add("@Comment", "Thank you for signing up to the Europen Union Central Banking System");
-
-            Databank.executenonquery("Insert into Transactions(ID,FromID,ToID,Amount,Date,Comment) Values(@ID,@FromID,@ToID,@Amount,@Date,@Comment);",data);
+            data.Add("@sub", false);
+            Databank.executenonquery("Insert into Transactions(TransID,FromKID,ToKID,Amount,Date,Comment,Subtraction) Values(@ID,@FromID,@ToID,@Amount,@Date,@Comment,@sub);",data);
 
             MessageBox.Show("Account successfully created");
             this.Close();
