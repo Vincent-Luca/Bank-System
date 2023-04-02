@@ -16,7 +16,7 @@ namespace Banksystem
         /// <summary>
         /// The command that sends all querys to the database
         /// </summary>
-        private SqlCommand _command;
+        private readonly SqlCommand _command;
         /// <summary>
         /// the connection to the databank
         /// </summary>

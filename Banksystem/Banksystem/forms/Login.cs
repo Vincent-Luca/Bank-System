@@ -44,6 +44,7 @@ namespace Banksystem
             }
 
             login();
+
         }
 
         private void login(bool rememberme = false)
@@ -73,11 +74,17 @@ namespace Banksystem
             //}
 
             this.Hide();
-            KontoÜbersicht k = new KontoÜbersicht(userdata, Databank);
+            resettext();
+            KontoUebersicht k = new KontoUebersicht(userdata, Databank);
             k.ShowDialog();
             this.Show();
         }
 
+        private void resettext()
+        {
+            txt_pin.Text = "";
+            txt_username.Text = "";
+        }
 
         private void InsertData(DataTable data)
         {
@@ -85,7 +92,6 @@ namespace Banksystem
             {
                 userdata = new userdata(int.Parse(item[0].ToString()), item[1].ToString(), item[2].ToString(), DateTime.Parse(item[3].ToString()));
             }
-            return;
         }
 
         private void btn_newaccount_Click(object sender, EventArgs e)

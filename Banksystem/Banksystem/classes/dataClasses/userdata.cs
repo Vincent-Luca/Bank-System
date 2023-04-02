@@ -9,10 +9,10 @@ namespace Banksystem
 {
     public class userdata
     {
-        public int ID;
-        public string Name;
-        public string Pin;
-        public DateTime CreationDate;
+        public readonly int ID;
+        public readonly string Name;
+        public readonly string Pin;
+        public readonly DateTime CreationDate;
 
         public userdata(int ID, string Name, string Pin, DateTime CreationDate)
         {

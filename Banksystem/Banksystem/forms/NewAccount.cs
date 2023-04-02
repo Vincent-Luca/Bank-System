@@ -74,7 +74,7 @@ namespace Banksystem.forms
 
         private string createIBAN(encryption encript)
         {
-            return "EUCBS"+encript.encrypt(txt_username.Text)+encript.encrypt(txt_pin.Text);
+            return "EUCBS"+encript.encrypt(txt_username.Text) + encript.encrypt(txt_pin.Text) + encript.encrypt("Main");
         }
 
         private void button1_Click(object sender, EventArgs e)

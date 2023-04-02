@@ -46,13 +46,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\dataClasses\AccountsData.cs" />
+    <Compile Include="classes\dataClasses\TransactionData.cs" />
     <Compile Include="classes\DBConnection.cs" />
     <Compile Include="classes\encryption.cs" />
-    <Compile Include="forms\KontoÜbersicht.cs">
+    <Compile Include="forms\Accounts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\KontoÜbersicht.Designer.cs">
-      <DependentUpon>KontoÜbersicht.cs</DependentUpon>
+    <Compile Include="forms\Accounts.Designer.cs">
+      <DependentUpon>Accounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\KontoUebersicht.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\KontoUebersicht.Designer.cs">
+      <DependentUpon>KontoUebersicht.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\Login.cs">
       <SubType>Form</SubType>
@@ -74,8 +82,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>rememberme.settings</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="forms\KontoÜbersicht.resx">
-      <DependentUpon>KontoÜbersicht.cs</DependentUpon>
+    <EmbeddedResource Include="forms\Accounts.resx">
+      <DependentUpon>Accounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\KontoUebersicht.resx">
+      <DependentUpon>KontoUebersicht.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
