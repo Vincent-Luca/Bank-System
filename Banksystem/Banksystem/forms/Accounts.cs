@@ -26,7 +26,7 @@ namespace Banksystem.forms
         {
             lbl_iban.Text = data.IBAN;
             lbl_name.Text = data.name;
-            lbl_total.Text = data.Total.ToString();
+            lbl_total.Text = data.Total.ToString()+"€";
             if (data.Total.ToString()[0] == '-')
             {
                 lbl_total.ForeColor = Color.Red;
