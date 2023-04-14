@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -49,7 +50,49 @@ namespace Banksystem.forms
 
         private void btn_transaction_Click(object sender, EventArgs e)
         {
+            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>
+            {
+                {"@IBAN",txt_Riban.Text }
+            };
 
+            if (!IsNumeric(txt_Amount.Text))
+            {
+                MessageBox.Show("Please only put numbers in the Amount textbox");
+            }
+
+            if (!Databank.isAvailable("Select * from Konto where IBAN = @IBAN;",data))
+            {
+                MessageBox.Show("No Account exists with that IBAN, please Check your spelling");
+                return;
+            }
+
+            int ToKID = Convert.ToInt32(Databank.SQLSelect("Select KID from Konto where IBAN = @IBAN;",data).Rows[0][0]);
+
+            data.Clear();
+            data.Add("@amount", Convert.ToDouble(txt_Amount.Text));
+            data.Add("@KID", ToKID);
+            // Add to the ToKID
+            Databank.executenonquery("UPDATE Konto Set Total = total + @amount where KID=@KID", data);
+            //Subtracts from the FromKID
+            data.Remove("@KID");
+            data.Add("@KID", Accounts[combo_Accounts.SelectedIndex].KID);
+            Databank.executenonquery("UPDATE Konto Set Total = total - @amount where KID=@KID", data);
+            //makes a new insert into the transaction table
+            data.Clear();
+            data.Add("@TransID", Convert.ToDouble(txt_Amount.Text));
+            data.Add("@FromKID", Accounts[combo_Accounts.SelectedIndex].KID);
+            data.Add("@ToKID", ToKID);
+            data.Add("@Amount", Convert.ToDouble(txt_Amount.Text));
+            data.Add("@Date", DateTime.Parse(DateTime.Now.ToShortDateString()));
+            data.Add("@Comment",  string.IsNullOrEmpty(txt_Comment.Text) ? null : txt_Comment.Text);
+            Databank.executenonquery("Insert into Transactions(TransID, FromKID, ToKID, Amount, Date, Comment) values(@TransID, @FromKID, @ToKID, @Amount, @Date, @Comment)", data);
+            MessageBox.Show("Transaction Succsesfull!");
+            this.Close();
+        }
+
+        private bool IsNumeric(string input)
+        {
+            return double.TryParse(input, out _);
         }
     }
 }

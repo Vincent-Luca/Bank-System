@@ -65,12 +65,13 @@ namespace Banksystem.forms
             data.Add("@Amount", 500);
             data.Add("@Date", DateTime.Parse(DateTime.Now.ToShortDateString()));
             data.Add("@Comment", "Thank you for signing up to the Europen Union Central Banking System");
-            data.Add("@sub", false);
-            Databank.executenonquery("Insert into Transactions(TransID,FromKID,ToKID,Amount,Date,Comment,Subtraction) Values(@ID,@FromID,@ToID,@Amount,@Date,@Comment,@sub);",data);
+            Databank.executenonquery("Insert into Transactions(TransID,FromKID,ToKID,Amount,Date,Comment) Values(@ID,@FromID,@ToID,@Amount,@Date,@Comment);",data);
 
             MessageBox.Show("Account successfully created");
             this.Close();
         }
+
+        
 
         private string createIBAN(encryption encript)
         {

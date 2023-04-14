@@ -87,8 +87,17 @@ namespace Banksystem.forms
                 MessageBox.Show("Account must have a name");
                 return;
             }
+            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>
+            {
+                {"@AccID",userdata.ID },
+                {"@Name", txt_AccName.Text}
+            };
 
-            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
+            if (Databank.isAvailable("Select * from Konto where AccID = @AccID and Name = @Name;",data))
+            {
+                MessageBox.Show("You already have a Account with that name");
+                return;
+            }
 
             data.Clear();
             data.Add("@kid", int.Parse(Databank.SQLSelect("Select TOP(1) KID from Konto order by KID desc;").Rows[0][0].ToString()) + 1);
@@ -112,6 +121,17 @@ namespace Banksystem.forms
         {
             Transactions trans = new Transactions(Databank, userdata);
             trans.ShowDialog();
+            RefreshAcc();
+        }
+
+        private void RefreshAcc()
+        {
+            pan_Accounts.Controls.Clear();
+            Dictionary<string, dynamic> data = new Dictionary<string, dynamic>
+            {
+                {"@AccID", userdata.ID}
+            };
+            LoadAllKonto(Databank.SQLSelect("Select * from Konto where AccID = @AccID", data));
         }
     }
 }

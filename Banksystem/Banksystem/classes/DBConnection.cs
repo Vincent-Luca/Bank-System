@@ -86,6 +86,7 @@ namespace Banksystem
         /// <exception cref="SqlException"></exception>
         public DataTable SQLSelect(string SQLQuery)
         {
+
             try
             {
                 _command.Parameters.Clear();
@@ -192,7 +193,6 @@ namespace Banksystem
                     dt.Rows.Add(dr);
                 }
                 _reader.Close();
-
                 return dt;
             }
             catch (SqlException ex)
@@ -209,6 +209,7 @@ namespace Banksystem
         /// <exception cref="SqlException"></exception>
         public bool executenonquery(string SQLQuery)
         {
+            _con.BeginTransaction();
             try
             {
                 _command.Parameters.Clear();
@@ -218,10 +219,12 @@ namespace Banksystem
 
                 _command.CommandText = SQLQuery;
                 _command.ExecuteNonQuery();
+                _command.Transaction.Commit();
                 return true;
             }
             catch (SqlException ex)
             {
+                _command.Transaction.Rollback();
                 throw new Exception("Error while Finishing Query: " + ex.Message);
             }
         }
@@ -236,6 +239,7 @@ namespace Banksystem
         /// <exception cref="SqlException"></exception>
         public bool executenonquery(string SQLQuery, Dictionary<string, dynamic> parameters)
         {
+            _con.BeginTransaction();
             try
             {
                 _command.Parameters.Clear();
@@ -250,10 +254,12 @@ namespace Banksystem
 
                 _command.CommandText = SQLQuery;
                 _command.ExecuteNonQuery();
+                _command.Transaction.Commit();
                 return true;
             }
             catch (SqlException ex)
             {
+                _command.Transaction.Rollback();
                 throw new Exception("Error while Finishing Query: " + ex.Message);
             }
         }

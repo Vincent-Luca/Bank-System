@@ -14,9 +14,8 @@ namespace Banksystem.classes.dataClasses
         public readonly int Amount;
         public readonly DateTime Date;
         public readonly string Comment;
-        public readonly bool subtraction;
 
-        public TransactionData(int TransID,int FromKID,int ToKID,int Amount, DateTime Date, string Comment, bool subtraction)
+        public TransactionData(int TransID,int FromKID,int ToKID,int Amount, DateTime Date, string Comment)
         {
             this.TransID = TransID;
             this.FromKID = FromKID;
@@ -24,7 +23,6 @@ namespace Banksystem.classes.dataClasses
             this.Amount = Amount;
             this.Date = Date;
             this.Comment = Comment;
-            this.subtraction = subtraction;
         }
     }
 }
