@@ -36,6 +36,7 @@
             this.txt_confirmpin = new System.Windows.Forms.TextBox();
             this.btn_createnewaccount = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.chb_BusinessAccount = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txt_username
@@ -46,7 +47,7 @@
             this.txt_username.ForeColor = System.Drawing.Color.Silver;
             this.txt_username.Location = new System.Drawing.Point(12, 47);
             this.txt_username.Name = "txt_username";
-            this.txt_username.Size = new System.Drawing.Size(188, 24);
+            this.txt_username.Size = new System.Drawing.Size(242, 24);
             this.txt_username.TabIndex = 0;
             // 
             // lbl_username
@@ -81,7 +82,7 @@
             this.txt_pin.ForeColor = System.Drawing.Color.Silver;
             this.txt_pin.Location = new System.Drawing.Point(12, 101);
             this.txt_pin.Name = "txt_pin";
-            this.txt_pin.Size = new System.Drawing.Size(188, 24);
+            this.txt_pin.Size = new System.Drawing.Size(242, 24);
             this.txt_pin.TabIndex = 2;
             this.txt_pin.UseSystemPasswordChar = true;
             // 
@@ -105,7 +106,7 @@
             this.txt_confirmpin.ForeColor = System.Drawing.Color.Silver;
             this.txt_confirmpin.Location = new System.Drawing.Point(12, 155);
             this.txt_confirmpin.Name = "txt_confirmpin";
-            this.txt_confirmpin.Size = new System.Drawing.Size(188, 24);
+            this.txt_confirmpin.Size = new System.Drawing.Size(242, 24);
             this.txt_confirmpin.TabIndex = 4;
             this.txt_confirmpin.UseSystemPasswordChar = true;
             // 
@@ -115,9 +116,9 @@
             this.btn_createnewaccount.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_createnewaccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_createnewaccount.ForeColor = System.Drawing.Color.Silver;
-            this.btn_createnewaccount.Location = new System.Drawing.Point(12, 225);
+            this.btn_createnewaccount.Location = new System.Drawing.Point(12, 255);
             this.btn_createnewaccount.Name = "btn_createnewaccount";
-            this.btn_createnewaccount.Size = new System.Drawing.Size(188, 58);
+            this.btn_createnewaccount.Size = new System.Drawing.Size(242, 58);
             this.btn_createnewaccount.TabIndex = 7;
             this.btn_createnewaccount.Text = "Create New Account";
             this.btn_createnewaccount.UseVisualStyleBackColor = false;
@@ -137,12 +138,26 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // chb_BusinessAccount
+            // 
+            this.chb_BusinessAccount.AutoSize = true;
+            this.chb_BusinessAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.chb_BusinessAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_BusinessAccount.ForeColor = System.Drawing.Color.Silver;
+            this.chb_BusinessAccount.Location = new System.Drawing.Point(16, 225);
+            this.chb_BusinessAccount.Name = "chb_BusinessAccount";
+            this.chb_BusinessAccount.Size = new System.Drawing.Size(247, 24);
+            this.chb_BusinessAccount.TabIndex = 9;
+            this.chb_BusinessAccount.Text = "Is this a business account?";
+            this.chb_BusinessAccount.UseVisualStyleBackColor = false;
+            // 
             // NewAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(217, 296);
+            this.ClientSize = new System.Drawing.Size(266, 324);
+            this.Controls.Add(this.chb_BusinessAccount);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_createnewaccount);
             this.Controls.Add(this.lbl_confirmpin);
@@ -151,8 +166,8 @@
             this.Controls.Add(this.txt_pin);
             this.Controls.Add(this.lbl_username);
             this.Controls.Add(this.txt_username);
-            this.MaximumSize = new System.Drawing.Size(233, 335);
-            this.MinimumSize = new System.Drawing.Size(233, 335);
+            this.MaximumSize = new System.Drawing.Size(282, 363);
+            this.MinimumSize = new System.Drawing.Size(282, 363);
             this.Name = "NewAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "NewAccount";
@@ -171,5 +186,6 @@
         private System.Windows.Forms.TextBox txt_confirmpin;
         private System.Windows.Forms.Button btn_createnewaccount;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox chb_BusinessAccount;
     }
 }

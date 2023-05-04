@@ -41,9 +41,10 @@ namespace Banksystem.forms
                 {"@ID",id},
                 {"@Name",txt_username.Text },
                 {"@Pin", encript.encrypt(txt_pin.Text) },
-                {"@CreationDate",DateTime.Parse(DateTime.Now.ToShortDateString()) }
+                {"@CreationDate",DateTime.Parse(DateTime.Now.ToShortDateString()) },
+                {"@BusinessAccount",chb_BusinessAccount.Checked }
             };
-            Databank.executenonquery("Insert into Account(AccID,Name,Pin,CreationDate) values(@ID,@Name,@Pin,@CreationDate);", data);
+            Databank.executenonquery("Insert into Account(AccID,Name,Pin,CreationDate,BusinessAccount) values(@ID,@Name,@Pin,@CreationDate,@BusinessAccount);", data);
 
             int kid = int.Parse(Databank.SQLSelect("Select TOP(1) KID from Konto order by KID desc;").Rows[0][0].ToString()) + 1;
             data.Clear();
