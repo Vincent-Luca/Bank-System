@@ -79,6 +79,11 @@ namespace Banksystem.forms
             return "EUCBS"+encript.encrypt(txt_username.Text) + encript.encrypt(txt_pin.Text) + encript.encrypt("Main");
         }
 
+        public string createBID()
+        {
+            
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             txt_pin.UseSystemPasswordChar = !txt_pin.UseSystemPasswordChar;
