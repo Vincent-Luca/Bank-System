@@ -90,7 +90,7 @@ namespace Banksystem
         {
             foreach (DataRow item in data.Rows)
             {
-                userdata = new userdata(int.Parse(item[0].ToString()), item[1].ToString(), item[2].ToString(), DateTime.Parse(item[3].ToString()));
+                userdata = new userdata(int.Parse(item[0].ToString()), item[1].ToString(), item[2].ToString(), DateTime.Parse(item[3].ToString()),false);
             }
         }
 
